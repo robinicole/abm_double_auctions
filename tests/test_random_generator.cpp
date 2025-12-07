@@ -1,9 +1,9 @@
-#include "random_generator.h"
-
 #include <gtest/gtest.h>
 
 #include <cmath>
 #include <set>
+
+#include "random_generator.h"
 
 namespace abm {
 namespace {
@@ -11,7 +11,8 @@ namespace {
 class RandomGeneratorTest : public ::testing::Test {
  protected:
   void SetUp() override {
-    rng_ = std::make_unique<RandomGenerator>(42);  // Fixed seed for reproducibility
+    rng_ = std::make_unique<RandomGenerator>(
+        42);  // Fixed seed for reproducibility
   }
 
   std::unique_ptr<RandomGenerator> rng_;

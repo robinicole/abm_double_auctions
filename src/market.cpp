@@ -210,8 +210,6 @@ void Market::WriteTimeSeries() {
                     << valid_bids_ << "\t" << valid_asks_ << "\n";
 }
 
-std::string Market::Display() const {
-  return std::to_string(buy_sell_ratio_);
-}
+std::string Market::Display() const { return std::to_string(buy_sell_ratio_); }
 
 }  // namespace abm

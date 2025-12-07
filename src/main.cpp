@@ -37,44 +37,43 @@ int main(int argc, char** argv) {
   // Command line argument parsing
   po::options_description desc(
       "Multi-agent simulation of double auction model with 2 markets");
-  desc.add_options()
-      ("help,h", "Print help message")
-      ("nagents", po::value<int>(&num_agents)->default_value(20000),
-          "Number of agents in the simulation")
-      ("NSnapshot", po::value<int>(&snapshot_interval)->default_value(-1),
-          "Number of steps between snapshots (-1 = no snapshots)")
-      ("th1", po::value<double>(&theta1)->default_value(0.3),
-          "Value of theta1 (market 1 preference)")
-      ("th2", po::value<double>(&theta2)->default_value(0.7),
-          "Value of theta2 (market 2 preference)")
-      ("fastfrac", po::value<double>(&fast_fraction)->default_value(0.0),
-          "Fraction of agents with fparam = 1")
-      ("nsteps", po::value<int>(&iterations)->default_value(5000),
-          "Number of simulation steps")
-      ("fparam", po::value<double>(&forget_param)->default_value(0.01),
-          "Forgetting parameter")
-      ("pb1", po::value<double>(&p1)->default_value(0.2),
-          "Buying probability of population 1")
-      ("pb2", po::value<double>(&p2)->default_value(0.8),
-          "Buying probability of population 2")
-      ("T", po::value<double>(&temperature)->default_value(0.2),
-          "Temperature")
-      ("outdist", po::value<std::string>(&output_dist)->default_value("findist.dat"),
-          "Output file for final distribution (use 'no' to disable)")
-      ("mbuy", po::value<double>(&mean_buy)->default_value(11.0),
-          "Average bid price")
-      ("msell", po::value<double>(&mean_sell)->default_value(10.0),
-          "Average ask price")
-      ("sigma", po::value<double>(&sigma)->default_value(1.0),
-          "Variance of bids/asks")
-      ("alpha", po::value<double>(&alpha)->default_value(1.0),
-          "Fictitious play coefficient")
-      ("mar_ts", po::value<std::string>(&market_file)->default_value("marketts.dat"),
-          "Market time series file prefix (use 'no' to disable)")
-      ("mode", po::value<std::string>(&mode)->default_value("fbfs"),
-          "Agent type: 'fbfs' or 'adaptive'")
-      ("prefix", po::value<std::string>(&prefix)->default_value(""),
-          "Prefix for output files");
+  desc.add_options()("help,h", "Print help message")(
+      "nagents", po::value<int>(&num_agents)->default_value(20000),
+      "Number of agents in the simulation")(
+      "NSnapshot", po::value<int>(&snapshot_interval)->default_value(-1),
+      "Number of steps between snapshots (-1 = no snapshots)")(
+      "th1", po::value<double>(&theta1)->default_value(0.3),
+      "Value of theta1 (market 1 preference)")(
+      "th2", po::value<double>(&theta2)->default_value(0.7),
+      "Value of theta2 (market 2 preference)")(
+      "fastfrac", po::value<double>(&fast_fraction)->default_value(0.0),
+      "Fraction of agents with fparam = 1")(
+      "nsteps", po::value<int>(&iterations)->default_value(5000),
+      "Number of simulation steps")(
+      "fparam", po::value<double>(&forget_param)->default_value(0.01),
+      "Forgetting parameter")("pb1", po::value<double>(&p1)->default_value(0.2),
+                              "Buying probability of population 1")(
+      "pb2", po::value<double>(&p2)->default_value(0.8),
+      "Buying probability of population 2")(
+      "T", po::value<double>(&temperature)->default_value(0.2), "Temperature")(
+      "outdist",
+      po::value<std::string>(&output_dist)->default_value("findist.dat"),
+      "Output file for final distribution (use 'no' to disable)")(
+      "mbuy", po::value<double>(&mean_buy)->default_value(11.0),
+      "Average bid price")("msell",
+                           po::value<double>(&mean_sell)->default_value(10.0),
+                           "Average ask price")(
+      "sigma", po::value<double>(&sigma)->default_value(1.0),
+      "Variance of bids/asks")("alpha",
+                               po::value<double>(&alpha)->default_value(1.0),
+                               "Fictitious play coefficient")(
+      "mar_ts",
+      po::value<std::string>(&market_file)->default_value("marketts.dat"),
+      "Market time series file prefix (use 'no' to disable)")(
+      "mode", po::value<std::string>(&mode)->default_value("fbfs"),
+      "Agent type: 'fbfs' or 'adaptive'")(
+      "prefix", po::value<std::string>(&prefix)->default_value(""),
+      "Prefix for output files");
 
   po::variables_map vm;
   try {
@@ -117,8 +116,10 @@ int main(int argc, char** argv) {
   abm::RandomGenerator rng;
 
   // Create market output filenames
-  std::string ts_m1 = (market_file == "no") ? "no" : prefix + "id_1_" + market_file;
-  std::string ts_m2 = (market_file == "no") ? "no" : prefix + "id_2_" + market_file;
+  std::string ts_m1 =
+      (market_file == "no") ? "no" : prefix + "id_1_" + market_file;
+  std::string ts_m2 =
+      (market_file == "no") ? "no" : prefix + "id_2_" + market_file;
 
   // Create markets
   abm::Market market1(1, theta1, rng, ts_m1);
@@ -136,7 +137,8 @@ int main(int argc, char** argv) {
     int x2 = static_cast<int>(num_agents * fast_fraction);
     int x3 = static_cast<int>((num_agents * (1 + fast_fraction)) / 2.0);
 
-    std::cout << "Number of fast agents: " << x1 << "; " << x2 << "; " << x3 << "\n";
+    std::cout << "Number of fast agents: " << x1 << "; " << x2 << "; " << x3
+              << "\n";
 
     for (int i = 0; i < num_agents; i++) {
       auto agent = std::make_unique<abm::AgentFBFS>(rng);

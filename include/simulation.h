@@ -15,8 +15,8 @@ namespace abm {
  * @brief Simulation mode enumeration
  */
 enum class SimulationMode {
-  kFBFS,      // Fixed Buy/Fixed Sell agents
-  kAdaptive   // Adaptive agents
+  kFBFS,     // Fixed Buy/Fixed Sell agents
+  kAdaptive  // Adaptive agents
 };
 
 /**
@@ -36,8 +36,8 @@ class Simulation {
    * @param prefix Filename prefix for output files
    */
   Simulation(Market& market1, Market& market2,
-             std::vector<std::unique_ptr<Agent>> agents,
-             SimulationMode mode, const std::string& prefix = "");
+             std::vector<std::unique_ptr<Agent>> agents, SimulationMode mode,
+             const std::string& prefix = "");
 
   /**
    * @brief Execute a single trading iteration

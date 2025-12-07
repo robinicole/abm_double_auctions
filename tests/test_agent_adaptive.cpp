@@ -1,8 +1,8 @@
-#include "agent_adaptive.h"
-
 #include <gtest/gtest.h>
 
 #include <cmath>
+
+#include "agent_adaptive.h"
 
 namespace abm {
 namespace {

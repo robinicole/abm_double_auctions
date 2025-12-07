@@ -49,9 +49,9 @@ class AgentFBFS : public AgentBase {
 
   // FBFS-specific state
   double buy_probability_ = 0.5;
-  double a1_ = 0.0;         // Attraction to market 1
-  double a2_ = 0.0;         // Attraction to market 2
-  double delta_ = 0.0;      // a1_ - a2_
+  double a1_ = 0.0;     // Attraction to market 1
+  double a2_ = 0.0;     // Attraction to market 2
+  double delta_ = 0.0;  // a1_ - a2_
 };
 
 }  // namespace abm

@@ -1,8 +1,8 @@
-#include "agent.h"
-
 #include <cmath>
 #include <iostream>
 #include <stdexcept>
+
+#include "agent.h"
 
 namespace abm {
 

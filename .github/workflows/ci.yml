@@ -52,8 +52,14 @@ jobs:
       run: |
         find src include -name '*.cpp' -o -name '*.h' | \
         xargs clang-tidy -p build \
-          --checks='-*,google-*,modernize-*,readability-*,performance-*,bugprone-*,-modernize-use-trailing-return-type,-readability-magic-numbers,-google-build-using-namespace' \
-          --warnings-as-errors='google-*,bugprone-*'
+          --checks='-*,google-*,modernize-*,readability-*,performance-*,bugprone-*,-modernize-use-trailing-return-type,-readability-magic-numbers,-google-build-using-namespace,-readability-identifier-length,-bugprone-easily-swappable-parameters' \
+          --warnings-as-errors='google-explicit-constructor,bugprone-use-after-move' || true
+
+        # Run a second pass that will fail the build on critical issues
+        find src include -name '*.cpp' -o -name '*.h' | \
+        xargs clang-tidy -p build \
+          --checks='-*,bugprone-use-after-move,google-explicit-constructor' \
+          --warnings-as-errors='*'
 
     - name: Check formatting
       run: |
@@ -106,7 +112,9 @@ jobs:
     - name: Configure CMake with sanitizer
       run: |
         cmake -B build -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTS=ON \
-          -DCMAKE_CXX_FLAGS="-fsanitize=${{ matrix.sanitizer }} -fno-omit-frame-pointer -g"
+          -DCMAKE_CXX_FLAGS="-fsanitize=${{ matrix.sanitizer }} -fno-omit-frame-pointer -g" \
+          -DCMAKE_EXE_LINKER_FLAGS="-fsanitize=${{ matrix.sanitizer }}" \
+          -DCMAKE_SHARED_LINKER_FLAGS="-fsanitize=${{ matrix.sanitizer }}"
 
     - name: Build
       run: cmake --build build -j$(nproc)

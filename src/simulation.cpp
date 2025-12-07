@@ -73,12 +73,14 @@ int Simulation::RunIterations(int n, int snapshot_interval) {
   for (int i = 0; i < n; i++) {
     // Progress output
     if (mode_ == SimulationMode::kAdaptive) {
-      std::cout << "\r" << static_cast<double>(i) * 100.0 / static_cast<double>(n)
+      std::cout << "\r"
+                << static_cast<double>(i) * 100.0 / static_cast<double>(n)
                 << "%" << std::flush;
     } else {
       double f1 = AverageScore(0.2);
       double f2 = AverageScore(0.8);
-      std::cout << "\r" << static_cast<double>(i) * 100.0 / static_cast<double>(n)
+      std::cout << "\r"
+                << static_cast<double>(i) * 100.0 / static_cast<double>(n)
                 << "% f1 = " << f1 << "\t f2 = " << f2 << std::flush;
       fractions_file_ << f1 << "\t" << f2 << "\n";
     }
@@ -102,28 +104,24 @@ int Simulation::RunIterations(int n, int snapshot_interval) {
 }
 
 void Simulation::SaveSnapshot(int snapshot_number) {
-  std::ofstream file(prefix_ + "dist_snapshot" + std::to_string(snapshot_number) +
-                     ".dat");
+  std::ofstream file(prefix_ + "dist_snapshot" +
+                     std::to_string(snapshot_number) + ".dat");
 
   if (mode_ == SimulationMode::kFBFS) {
     file << "score\tpb\tfparam\tlast_score\tcgscore\tlast_choice\n";
     for (const auto& agent : agents_) {
-      file << agent->GetScore()[0] << "\t"
-           << agent->GetBuyProbability() << "\t"
-           << agent->GetForgetParam() << "\t"
-           << agent->GetLastScore() << "\t"
-           << agent->GetCumulativeScore() << "\t"
-           << agent->GetChoice() << "\n";
+      file << agent->GetScore()[0] << "\t" << agent->GetBuyProbability() << "\t"
+           << agent->GetForgetParam() << "\t" << agent->GetLastScore() << "\t"
+           << agent->GetCumulativeScore() << "\t" << agent->GetChoice() << "\n";
     }
   } else {
     file << "AB1\tAS1\tAB2\tAS2\tfparam\tlast_score\tcgscore\n";
     for (const auto& agent : agents_) {
       auto scores = agent->GetScore();
-      file << scores[0] << "\t" << scores[1] << "\t"
-           << scores[2] << "\t" << scores[3] << "\t"
-           << agent->GetForgetParam() << "\t"
-           << agent->GetLastScore() << "\t"
-           << agent->GetCumulativeScore() << "\n";
+      file << scores[0] << "\t" << scores[1] << "\t" << scores[2] << "\t"
+           << scores[3] << "\t" << agent->GetForgetParam() << "\t"
+           << agent->GetLastScore() << "\t" << agent->GetCumulativeScore()
+           << "\n";
     }
   }
 }

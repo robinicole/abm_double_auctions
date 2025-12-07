@@ -1,8 +1,8 @@
-#include "agent_fbfs.h"
-
 #include <gtest/gtest.h>
 
 #include <cmath>
+
+#include "agent_fbfs.h"
 
 namespace abm {
 namespace {
@@ -48,7 +48,8 @@ TEST_F(AgentFBFSTest, InitializeScoreSetsRandomValues) {
 }
 
 TEST_F(AgentFBFSTest, ChoiceMarketSelectsMarket1WhenRandomLow) {
-  mock_rng_->setUniformSequence({0.1, 0.1});  // Low random for market choice and action
+  mock_rng_->setUniformSequence(
+      {0.1, 0.1});  // Low random for market choice and action
 
   int choice = agent_->ChoiceMarket();
 

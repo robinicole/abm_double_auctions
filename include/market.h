@@ -23,11 +23,11 @@ struct Proposal {
  * @brief Market state enumeration for state machine validation
  */
 enum class MarketState {
-  kReady,           // Ready for new turn
-  kCollecting,      // Collecting offers
-  kPriceSet,        // Trading price computed
-  kOrdersCleaned,   // Orders have been filtered
-  kRewarded         // Traders have been rewarded
+  kReady,          // Ready for new turn
+  kCollecting,     // Collecting offers
+  kPriceSet,       // Trading price computed
+  kOrdersCleaned,  // Orders have been filtered
+  kRewarded        // Traders have been rewarded
 };
 
 /**

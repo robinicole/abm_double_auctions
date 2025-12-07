@@ -1,5 +1,3 @@
-#include "simulation.h"
-
 #include <gtest/gtest.h>
 
 #include <memory>
@@ -8,6 +6,7 @@
 #include "agent_adaptive.h"
 #include "agent_fbfs.h"
 #include "market.h"
+#include "simulation.h"
 
 namespace abm {
 namespace {

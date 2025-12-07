@@ -13,22 +13,19 @@ namespace abm {
 /**
  * @brief Enumeration for agent actions
  */
-enum class Action {
-  kBuy = 0,
-  kSell = 1
-};
+enum class Action { kBuy = 0, kSell = 1 };
 
 /**
  * @brief Parameters for initializing an agent
  */
 struct AgentParams {
-  double sigma = 1.0;           ///< Variance of agent's bid
-  double forget_param = 0.1;    ///< Forgetting parameter
-  double mean_buy = 11.0;       ///< Average bid price
-  double mean_sell = 10.0;      ///< Average ask price
-  int id = 0;                   ///< Agent identifier
-  double temperature = 0.2;     ///< Temperature for softmax decisions
-  double buy_probability = 0.5; ///< Probability of buying (for FBFS agents)
+  double sigma = 1.0;            ///< Variance of agent's bid
+  double forget_param = 0.1;     ///< Forgetting parameter
+  double mean_buy = 11.0;        ///< Average bid price
+  double mean_sell = 10.0;       ///< Average ask price
+  int id = 0;                    ///< Agent identifier
+  double temperature = 0.2;      ///< Temperature for softmax decisions
+  double buy_probability = 0.5;  ///< Probability of buying (for FBFS agents)
 };
 
 /**
@@ -124,9 +121,9 @@ class AgentBase : public Agent {
 
   // Agent state
   int id_ = 0;
-  int choice_ = 1;          // Market choice (1 or 2)
+  int choice_ = 1;  // Market choice (1 or 2)
   Action action_ = Action::kBuy;
-  double sigma_ = 1.0;      // Variance of bids
+  double sigma_ = 1.0;  // Variance of bids
   double forget_param_ = 0.1;
   double bid_ = 0.0;
   double mean_buy_ = 11.0;
@@ -134,7 +131,7 @@ class AgentBase : public Agent {
   bool success_ = false;
   double last_score_ = 0.0;
   double temperature_ = 0.2;
-  double alpha_ = 1.0;      // Fictitious play coefficient
+  double alpha_ = 1.0;  // Fictitious play coefficient
   double cumulative_score_ = 0.0;
 };
 

@@ -1,11 +1,10 @@
-#include "market.h"
-
 #include <gtest/gtest.h>
 
 #include <memory>
 #include <vector>
 
 #include "agent_fbfs.h"
+#include "market.h"
 
 namespace abm {
 namespace {
@@ -33,7 +32,8 @@ class MarketTest : public ::testing::Test {
       params.mean_buy = 11.0;
       params.mean_sell = 10.0;
       params.temperature = 0.2;
-      params.buy_probability = (i < n / 2) ? 0.9 : 0.1;  // Half buyers, half sellers
+      params.buy_probability =
+          (i < n / 2) ? 0.9 : 0.1;  // Half buyers, half sellers
       agent->Initialize(params);
       agent_ptrs_.push_back(agent.get());
       agents_.push_back(std::move(agent));
@@ -56,7 +56,8 @@ class MarketTest : public ::testing::Test {
 TEST_F(MarketTest, InitialState) {
   EXPECT_EQ(market_->GetId(), 1);
   EXPECT_DOUBLE_EQ(market_->GetTheta(), 0.3);
-  EXPECT_EQ(market_->GetState(), MarketState::kRewarded);  // Initial state allows NewTurn
+  EXPECT_EQ(market_->GetState(),
+            MarketState::kRewarded);  // Initial state allows NewTurn
 }
 
 TEST_F(MarketTest, NewTurnTransitionsToReady) {
@@ -165,8 +166,8 @@ TEST_F(MarketTest, RewardTradersUpdatesAgentScores) {
       0.1, 0.1,  // Agent 0: market 1, buy
       0.1, 0.9,  // Agent 1: market 1, sell
       0.9, 0.9,  // Agent 2-9: market 2
-      0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9,
-      0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9,
+      0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9,
+      0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9,
   });
 
   mock_rng_->setGaussianValue(0.0);
@@ -204,8 +205,8 @@ TEST_F(MarketTest, DisplayReturnsBuySellRatio) {
       0.1, 0.1,  // Buy at market 1
       0.1, 0.1,  // Buy at market 1
       0.1, 0.9,  // Sell at market 1
-      0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9,
-      0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9,
+      0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9,
+      0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9,
   });
 
   mock_rng_->setGaussianValue(0.0);
